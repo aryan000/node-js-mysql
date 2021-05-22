@@ -1,7 +1,9 @@
 const Patient = require("../models/patient.modal.js");
+const logger = require('../config/logger.js');
 
 // Create and Save a new Patient
 exports.create = (req, res) => {
+    logger.info("Receiving request for registering patient");
     // Validate request
     if (!req.body) {
         res.status(400).send({
@@ -41,7 +43,8 @@ exports.create = (req, res) => {
 
 // Authorizes login for a patient
 exports.login = (req, res) => {
-    console.log("Validating request");
+    logger.info("Validating request for login");
+    
     // Validate request
     if (!req.body) {
         res.status(400).send({
@@ -67,7 +70,9 @@ exports.login = (req, res) => {
 
 //Check if the patient with user_id exists
 exports.doesPatientExist = (req, res) => {
-    console.log("Validating request");
+
+    logger.info("Validating request if patient exist");
+    
     // Validate request
     if (!req.body) {
         res.status(400).send({
@@ -93,6 +98,9 @@ exports.doesPatientExist = (req, res) => {
 
 // GetSecurity Questions for the patiet
 exports.getSecurityQuestions = (req, res) => {
+    
+    logger.info("Getting security Questions");
+
     Patient.getSecurityQuestions(req.params.user_id, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
@@ -109,6 +117,7 @@ exports.getSecurityQuestions = (req, res) => {
 };
 
 exports.validateSecurityQuestions = (req, res) => {
+    logger.info("Validating security Questions");
     // Validate request
     if (!req.body) {
         res.status(400).send({
@@ -137,6 +146,7 @@ exports.validateSecurityQuestions = (req, res) => {
 };
 
 exports.updatePassword = (req, res) => {
+    logger.info("Updating password");
     // Validate request
     if (!req.body) {
         res.status(400).send({

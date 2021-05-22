@@ -1,9 +1,8 @@
-
 # README #
 
-Node JS Backend Application.
+#Node JS Backend Application.
 
-Reger to swagger Documentation: http://localhost:4000/api-docs/
+### Refer to swagger documentation: http://localhost:4000/api-docs/
 
 ### What is this repository for? ###
 

@@ -1,4 +1,5 @@
 const sql = require("./db.js");
+const logger = require('../config/logger.js');
 
 // constructor
 const CovidSymptoms = function(covidSymptoms) {
@@ -24,11 +25,11 @@ const CovidSymptoms = function(covidSymptoms) {
 CovidSymptoms.updateCovidSymptoms = (covidSymptoms, result) => {
   sql.query("INSERT INTO covidapp_symptoms SET ?", covidSymptoms, (err, res) => {
       if (err) {
-          console.log("error: ", err);
+          logger.error("error: ", err);
           result(err, null);
           return;
       }
-      console.log("Covid Symptoms successfully updated with data ", { id: res.insertId, ...covidSymptoms });
+      logger.info("Covid Symptoms successfully updated with data ", { id: res.insertId, ...covidSymptoms });
       result(null, { message: "Covid Symptoms successfully updated with data ", userData: { id: res.insertId, ...covidSymptoms } });
   });
 };

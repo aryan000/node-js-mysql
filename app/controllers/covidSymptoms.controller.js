@@ -1,8 +1,9 @@
 const CovidSymptoms = require("../models/covidSymptoms.modal.js");
+const logger = require('../config/logger.js');
 
 // Create and Save a new Patient
 exports.updateCovidSymptoms = (req, res) => {
-  
+    logger.info("Receiving request for updateCovidSymptoms");
     // Validate request
     if (!req.body) {
         res.status(400).send({
