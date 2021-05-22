@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 });
 
 // adding all routes
-require("./app/routes/user.routes.js")(app);
+require("./app/routes/covidapp.routes.js")(app);
 
 // set port, listen for requests
 app.listen(4000, () => {
