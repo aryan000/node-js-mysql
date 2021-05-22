@@ -1,0 +1,120 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "version": "1.0.0",
+        "title": "Covid Repo Applicatoin",
+        "description": "Covid Repo Project Application API",
+        "license":
+        {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:4000",
+    "basePath": "/",
+    "tags": [
+    {
+        "name": "User",
+        "description": "API to register user in the system"
+    }],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths":
+    {
+        "/register":
+        {
+            "post":
+            {
+                "tags": ["User"],
+                "summary": "Register a users in system",
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "OK",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "User":
+        {
+            "required": ["username", "password", "is_superuser", "first_name",
+                "last_name", "email", "is_staff", "is_active", "date_joined", "user_id", "secQues1",
+                "secAns1", "secQues2", "secAns2", "secQues3", "secAns3"
+            ],
+            "properties":
+            {
+                "user_id":
+                {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "password":
+                {
+                    "type": "string"
+                },
+                "is_superuser":
+                {
+                    "type": "boolean"
+                },
+                "first_name":
+                {
+                    "type": "string"
+                },
+                "last_name":
+                {
+                    "type": "string"
+                },
+                "email":
+                {
+                    "type": "string"
+                },
+                "is_staff":
+                {
+                    "type": "boolean"
+                },
+                "is_active":
+                {
+                    "type": "boolean"
+                },
+                "date_joined":
+                {
+                    "type": "string"
+                },
+                "secQues1":
+                {
+                    "type": "string"
+                },
+                "secAns1":
+                {
+                    "type": "string"
+                },
+                "secQues2":
+                {
+                    "type": "string"
+                },
+                "secAns2":
+                {
+                    "type": "string"
+                },
+                "secQues3":
+                {
+                    "type": "string"
+                },
+                "secAns3":
+                {
+                    "type": "string"
+                }
+            }
+        }      
+    }
+}
