@@ -1,88 +1,113 @@
 {
     "swagger": "2.0",
-    "info": {
+    "info":
+    {
         "version": "1.0.0",
         "title": "Covid Repo Applicatoin",
         "description": "Covid Repo Project Application API",
-        "license": {
+        "license":
+        {
             "name": "MIT",
             "url": "https://opensource.org/licenses/MIT"
         }
     },
     "host": "localhost:4000",
     "basePath": "/",
-    "tags": [{
-        "name": "User",
+    "tags": [
+    {
+        "name": "Patient",
         "description": "API to register user in the system"
     }],
     "schemes": ["http"],
     "consumes": ["application/json"],
     "produces": ["application/json"],
-    "paths": {
-        "/register": {
-            "post": {
-                "tags": ["User"],
-                "summary": "Register a users in system",
-                "parameters": [{
+    "paths":
+    {
+        "/register":
+        {
+            "post":
+            {
+                "tags": ["Patient"],
+                "summary": "Register a patient in system",
+                "parameters": [
+                {
                     "name": "data",
                     "in": "body",
-                    "description": "Data of the users",
+                    "description": "Data of the patient",
                     "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/User"
+                    "schema":
+                    {
+                        "$ref": "#/definitions/Patient"
                     }
                 }],
-                "responses": {
-                    "200": {
+                "responses":
+                {
+                    "200":
+                    {
                         "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/User"
+                        "schema":
+                        {
+                            "$ref": "#/definitions/Patient"
 
                         }
                     }
                 }
             }
         },
-        "/login": {
-            "post": {
+        "/login":
+        {
+            "post":
+            {
                 "tags": ["Patient"],
                 "summary": "Check patient is authorised to login",
-                "parameters": [{
+                "parameters": [
+                {
                     "name": "data",
                     "in": "body",
                     "description": "User ID fo the patient",
                     "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/Patient"
+                    "schema":
+                    {
+                        "$ref": "#/definitions/LoginRequest"
                     }
                 }],
-                "responses": {
-                    "200": {
+                "responses":
+                {
+                    "200":
+                    {
                         "description": "OK",
-                        "schema": {
+                        "schema":
+                        {
                             "$ref": "#/definitions/LoginResponse"
                         }
                     }
                 }
             }
         },
-        "/doesPatientExist": {
-            "post": {
+        "/doesPatientExist":
+        {
+            "post":
+            {
                 "tags": ["Patient"],
                 "summary": "Check if patient with user_id exists",
-                "parameters": [{
+                "parameters": [
+                {
                     "name": "data",
                     "in": "body",
                     "description": "User ID fo the patient",
                     "required": true,
-                    "schema": {
+                    "schema":
+                    {
                         "$ref": "#/definitions/DoesPatientExistRequest"
                     }
                 }],
-                "responses": {
-                    "200": {
+                "responses":
+                {
+                    "200":
+                    {
                         "description": "OK",
-                        "schema": {
+                        "schema":
+                        {
                             "$ref": "#/definitions/DoesPatientExistResponse"
 
                         }
@@ -90,26 +115,152 @@
                 }
             }
         },
-        "/getSecurityQuestions/{user_id}": {
-            "get": {
+        "/getSecurityQuestions/{user_id}":
+        {
+            "get":
+            {
                 "tags": ["Patient"],
-                "summary": "Get Security Questions for the patient",                
-                "parameters": [{
+                "summary": "Get Security Questions for the patient",
+                "parameters": [
+                {
                     "name": "user_id",
                     "in": "path",
                     "description": "User ID fo the patient",
                     "required": true,
-                    "schema":{
+                    "schema":
+                    {
                         "type": "integer",
                         "minimum": 1
                     }
-                  
+
                 }],
-                "responses": {
-                    "200": {
+                "responses":
+                {
+                    "200":
+                    {
                         "description": "OK",
-                        "schema": {
+                        "schema":
+                        {
                             "$ref": "#/definitions/DoesPatientExistResponse"
+
+                        }
+                    }
+                }
+            }
+        },
+        "/validateSecurityQuestions":
+        {
+            "post":
+            {
+                "tags": ["Patient"],
+                "summary": "Check if security question for user matches ",
+                "parameters": [
+                {
+                    "name": "data",
+                    "in": "body",
+                    "description": "User ID fo the patient",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/SecurityQuestionValidationRequest"
+                    }
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "OK",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/SecurityQuestionValidationResponse"
+
+                        }
+                    }
+                }
+            }
+        },
+        "/updatePassword":{
+            "put":
+            {
+                "tags": ["Patient"],
+                "summary": "Update password for the patient",
+                "parameters": [
+                {
+                    "name": "data",
+                    "in": "body",
+                    "description": "User ID fo the patient",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/UpdatePasswordRequest"
+                    }
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "OK",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/SecurityQuestionValidationResponse"
+
+                        }
+                    }
+                }
+            }
+        }, 
+        "/updateCovidSymptoms":{
+            "post":{
+                "tags": ["CovidSymptoms"],
+                "summary": "Update covid symptoms for patient",
+                "parameters": [
+                {
+                    "name": "data",
+                    "in": "body",
+                    "description": "CovidSymptoms for the patient",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/CovidSymptoms"
+                    }
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "OK",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/SecurityQuestionValidationResponse"
+
+                        }
+                    }
+                }
+            }
+        },
+        "/updateComorbidities":{
+            "post":{
+                "tags": ["Comorbidities"],
+                "summary": "Update comorbidities symptoms for patient",
+                "parameters": [
+                {
+                    "name": "data",
+                    "in": "body",
+                    "description": "Comorbidities for the patient",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/Comorbidities"
+                    }
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "OK",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/SecurityQuestionValidationResponse"
 
                         }
                     }
@@ -117,116 +268,147 @@
             }
         }
     },
-    "definitions": {
-        "User": {
+    "definitions":
+    {
+        "Patient":
+        {
             "required": ["username", "password", "is_superuser", "first_name",
                 "last_name", "email", "is_staff", "is_active", "date_joined", "user_id", "secQues1",
                 "secAns1", "secQues2", "secAns2", "secQues3", "secAns3"
             ],
-            "properties": {
-                "user_id": {
+            "properties":
+            {
+                "user_id":
+                {
                     "type": "integer",
                     "example": "102",
                     "uniqueItems": true
                 },
-                "username": {
+                "username":
+                {
                     "type": "string",
                     "example": "testUser"
                 },
-                "password": {
+                "password":
+                {
                     "type": "string",
                     "example": "testUserPwd"
                 },
-                "is_superuser": {
+                "is_superuser":
+                {
                     "type": "boolean",
                     "example": 0
                 },
-                "first_name": {
+                "first_name":
+                {
                     "type": "string",
                     "example": "First"
                 },
-                "last_name": {
+                "last_name":
+                {
                     "type": "string",
                     "example": "Last"
                 },
-                "email": {
+                "email":
+                {
                     "type": "string",
                     "example": "testUser@gmail.com"
                 },
-                "is_staff": {
+                "is_staff":
+                {
                     "type": "boolean",
                     "example": 0
                 },
-                "is_active": {
+                "is_active":
+                {
                     "type": "boolean",
                     "example": 0
                 },
-                "date_joined": {
+                "date_joined":
+                {
                     "type": "date",
                     "pattern": "/([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/",
                     "example": "2019-05-17"
                 },
-                "secQues1": {
+                "secQues1":
+                {
                     "type": "string",
                     "example": "Favourite Food"
                 },
-                "secAns1": {
+                "secAns1":
+                {
                     "type": "string",
                     "example": "Rice"
                 },
-                "secQues2": {
+                "secQues2":
+                {
                     "type": "string",
                     "example": "Favourite Cricketer"
                 },
-                "secAns2": {
+                "secAns2":
+                {
                     "type": "string",
                     "example": "Sachin Tendulkar"
                 },
-                "secQues3": {
+                "secQues3":
+                {
                     "type": "string",
                     "example": "Favourite Sport"
                 },
-                "secAns3": {
+                "secAns3":
+                {
                     "type": "string",
                     "example": "Hockey"
                 }
             }
         },
-        "Patient": {
+        "LoginRequest":
+        {
             "required": ["user_id", "password"],
-            "properties": {
-                "user_id": {
+            "properties":
+            {
+                "user_id":
+                {
                     "type": "integer",
                     "example": "102",
                     "uniqueItems": true
                 },
-                "password": {
+                "password":
+                {
                     "type": "string",
                     "example": "testUserPwd"
                 }
             }
         },
-        "LoginResponse": {
-            "properties": {
-                "message": {
+        "LoginResponse":
+        {
+            "properties":
+            {
+                "message":
+                {
                     "type": "string",
                     "example": "Patient is authenticated"
                 },
-                "isUserAuthenticated": {
+                "isUserAuthenticated":
+                {
                     "type": "boolean",
                     "example": 1
                 },
-                "id": {
+                "id":
+                {
                     "type": "integer",
                     "example": 102
                 }
             }
 
         },
-        "DoesPatientExistRequest": {
+        "DoesPatientExistRequest":
+        {
             "required": ["user_id"],
-            "properties": {
-                "user_id": {
+            "properties":
+            {
+                "user_id":
+                {
                     "type": "integer",
                     "example": "102",
                     "uniqueItems": true
@@ -234,49 +416,299 @@
             }
 
         },
-        "DoesPatientExistResponse": {
-            "properties": {
-                "message": {
+        "DoesPatientExistResponse":
+        {
+            "properties":
+            {
+                "message":
+                {
                     "type": "string",
                     "example": "Patient exists"
                 },
-                "doesPatientExist": {
+                "doesPatientExist":
+                {
                     "type": "boolean",
                     "example": 1
                 },
-                "id": {
+                "id":
+                {
                     "type": "integer",
                     "example": 102
                 }
             }
 
         },
-        "SecurityQuestionResponse": {
-            "properties": {
-                "message": {
+        "SecurityQuestionResponse":
+        {
+            "properties":
+            {
+                "message":
+                {
                     "type": "string",
                     "example": "Patient exists"
                 },
-                "secQues1": {
+                "secQues1":
+                {
                     "type": "string",
                     "example": "Favourite Food"
                 },
 
-                "secQues2": {
+                "secQues2":
+                {
                     "type": "string",
                     "example": "Favourite Cricketer"
                 },
 
-                "secQues3": {
+                "secQues3":
+                {
                     "type": "string",
                     "example": "Favourite Sport"
                 },
-                "id": {
+                "id":
+                {
                     "type": "integer",
                     "example": 102
                 }
             }
 
+        },
+        "SecurityQuestionValidationRequest":
+        {
+            "properties":
+            {                
+                "secQues1":
+                {
+                    "type": "string",
+                    "example": "Favourite Food"
+                },
+
+                "secQues2":
+                {
+                    "type": "string",
+                    "example": "Favourite Cricketer"
+                },
+
+                "secQues3":
+                {
+                    "type": "string",
+                    "example": "Favourite Sport"
+                },
+                "secAns1":
+                {
+                    "type": "string",
+                    "example": "Rice"
+                },
+
+                "secAns2":
+                {
+                    "type": "string",
+                    "example": "Sachin Tendulkar"
+                },
+
+                "secAns3":
+                {
+                    "type": "string",
+                    "example": "Hoeckey"
+                },
+                "user_id":
+                {
+                    "type": "integer",
+                    "example": 102
+                }
+            }
+
+        },
+        "SecurityQuestionValidationResponse":
+        {
+            "properties":
+            {
+                "message":
+                {
+                    "type": "string",
+                    "example": "Valid Patient"
+                },
+                "successFullMatch":
+                {
+                    "type": "boolean",
+                    "example": 1
+                },
+
+                "user_id":
+                {
+                    "type": "integer",
+                    "example": 102
+                }
+            }
+
+        },
+        "UpdatePasswordRequest":
+        {
+            "properties":
+            {
+                "password":
+                {
+                    "type": "string",
+                    "example": "updatedPassword"
+                },               
+                "user_id":
+                {
+                    "type": "integer",
+                    "example": 111
+                }
+            }
+
+        },
+        "CovidSymptoms":{
+            "required":["diarhea","fever","dry_cough","body_ache","headache","runny_nose","nausea",
+                "vomiting","anosmia","ageusia","rashes","conjunctivitis","date","user_id",
+                "covidseverity"],
+                "properties":
+            {
+                "sore_throat": {
+                    "type": "integer",
+                    "example":0
+                },
+                "diarhea" : {
+                    "type": "integer",
+                    "example":0
+                  },
+                  "fever" : {
+                    "type": "integer",
+                    "example":0
+                  },
+                  "dry_cough" : {
+                    "type": "integer",
+                    "example":0
+                  },
+                  "body_ache" : {
+                    "type": "integer",
+                    "example":0
+                  },
+                  "headache" : {
+                    "type": "integer",
+                    "example":0
+                  },
+                  "runny_nose" : {
+                    "type": "integer",
+                    "example":0
+                  },
+                  "nausea" : {
+                    "type": "integer",
+                    "example":0
+                  },
+                  "vomiting" : {
+                    "type": "integer",
+                    "example":0
+                  },
+                  "anosmia" : {
+                    "type": "integer",
+                    "example":0
+                  },
+                  "ageusia" : {
+                    "type": "integer",
+                    "example":0
+                  },
+                  "rashes" : {
+                    "type": "integer",
+                    "example":0
+                  },
+                  "conjunctivitis" : {
+                    "type": "integer",
+                    "example":0
+                  },
+                  "date" : {
+                    "type": "date",
+                    "pattern": "/([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/",
+                    "example": "2019-05-17"
+                  },
+                  "user_id" : {
+                    "type": "integer",
+                    "example":13,
+                    "uniqueItems": true
+                  },
+                  "covidseverity" : {
+                    "type": "integer",
+                    "example":0
+                  }                  
+            } 
+        },
+        "Comorbidities":{
+            "required":["diabetes","copd","renal","pvd","chf","dementia","cancer","stroke",
+                "hepatic","heart","ulcer","paralysis","aids","arthritis","user_id",
+                "dateFirstSymptoms"],
+                "properties":
+            {
+                "id": {
+                    "type": "integer",
+                    "example": 0
+                  },
+                  "diabetes": {
+                    "type": "integer",
+                    "example": 0
+                  },
+                  "copd": {
+                    "type": "integer",
+                    "example": 0
+                  },
+                  "renal": {
+                    "type": "integer",
+                    "example": 0
+                  },
+                  "pvd": {
+                    "type": "integer",
+                    "example": 0
+                  },
+                  "chf": {
+                    "type": "integer",
+                    "example": 0
+                  },
+                  "dementia": {
+                    "type": "integer",
+                    "example": 0
+                  },
+                  "cancer": {
+                    "type": "integer",
+                    "example": 0
+                  },
+                  "stroke": {
+                    "type": "integer",
+                    "example": 0
+                  },
+                  "hepatic": {
+                    "type": "integer",
+                    "example": 0
+                  },
+                  "heart": {
+                    "type": "integer",
+                    "example": 0
+                  },
+                  "ulcer": {
+                    "type": "integer",
+                    "example": 0
+                  },
+                  "paralysis": {
+                    "type": "integer",
+                    "example": 0
+                  },
+                  "aids": {
+                    "type": "integer",
+                    "example": 0
+                  },
+                  "arthritis": {
+                    "type": "integer",
+                    "example": 0
+                  },
+                  "user_id": {
+                    "type": "integer",
+                    "example": 13,
+                    "uniqueItems": true
+                  },
+                  "dateFirstSymptoms": {
+                     "type": "date",
+                      "pattern": "/([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/",
+                      "example": "2019-05-17"
+                  }           
+            } 
         }
     }
 }
