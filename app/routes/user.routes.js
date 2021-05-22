@@ -10,5 +10,7 @@ module.exports = app => {
     app.post("/login", patient.login);
 
     app.post("/doesPatientExist", patient.doesPatientExist);
+
+    app.get("/getSecurityQuestions/:user_id", patient.getSecurityQuestions);
     
   };

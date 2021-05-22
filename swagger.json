@@ -89,6 +89,32 @@
                     }
                 }
             }
+        },
+        "/getSecurityQuestions/{user_id}": {
+            "get": {
+                "tags": ["Patient"],
+                "summary": "Get Security Questions for the patient",                
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "User ID fo the patient",
+                    "required": true,
+                    "schema":{
+                        "type": "integer",
+                        "minimum": 1
+                    }
+                  
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DoesPatientExistResponse"
+
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -217,6 +243,33 @@
                 "doesPatientExist": {
                     "type": "boolean",
                     "example": 1
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 102
+                }
+            }
+
+        },
+        "SecurityQuestionResponse": {
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "example": "Patient exists"
+                },
+                "secQues1": {
+                    "type": "string",
+                    "example": "Favourite Food"
+                },
+
+                "secQues2": {
+                    "type": "string",
+                    "example": "Favourite Cricketer"
+                },
+
+                "secQues3": {
+                    "type": "string",
+                    "example": "Favourite Sport"
                 },
                 "id": {
                     "type": "integer",

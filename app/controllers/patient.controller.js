@@ -51,3 +51,19 @@ exports.doesPatientExist = (req, res) => {
   });
 
 };
+
+exports.getSecurityQuestions = (req, res) => {
+  Patient.getSecurityQuestions(req.params.user_id, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Patient with id ${req.params.user_id}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving Patient with id " + req.params.user_id
+        });
+      }
+    } else res.send(data);
+  });
+};
