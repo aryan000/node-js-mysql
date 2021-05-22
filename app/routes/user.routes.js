@@ -8,5 +8,7 @@ module.exports = app => {
 
     // if a user is Registered User
     app.post("/login", patient.login);
+
+    app.post("/doesPatientExist", patient.doesPatientExist);
     
   };

@@ -1,217 +1,224 @@
 {
     "swagger": "2.0",
-    "info":
-    {
+    "info": {
         "version": "1.0.0",
         "title": "Covid Repo Applicatoin",
         "description": "Covid Repo Project Application API",
-        "license":
-        {
+        "license": {
             "name": "MIT",
             "url": "https://opensource.org/licenses/MIT"
         }
     },
     "host": "localhost:4000",
     "basePath": "/",
-    "tags": [
-    {
+    "tags": [{
         "name": "User",
         "description": "API to register user in the system"
     }],
     "schemes": ["http"],
     "consumes": ["application/json"],
     "produces": ["application/json"],
-    "paths":
-    {
-        "/register":
-        {
-            "post":
-            {
+    "paths": {
+        "/register": {
+            "post": {
                 "tags": ["User"],
                 "summary": "Register a users in system",
-                "parameters": [
-                {
+                "parameters": [{
                     "name": "data",
                     "in": "body",
                     "description": "Data of the users",
                     "required": true,
-                    "schema":
-                    {
+                    "schema": {
                         "$ref": "#/definitions/User"
                     }
                 }],
-                "responses":
-                {
-                    "200":
-                    {
+                "responses": {
+                    "200": {
                         "description": "OK",
-                        "schema":
-                        {
+                        "schema": {
                             "$ref": "#/definitions/User"
+
                         }
                     }
                 }
             }
         },
-        "/login":
-        {
-            "post":
-            {
+        "/login": {
+            "post": {
                 "tags": ["Patient"],
                 "summary": "Check patient is authorised to login",
-                "parameters": [
-                {
+                "parameters": [{
                     "name": "data",
                     "in": "body",
                     "description": "User ID fo the patient",
                     "required": true,
-                    "schema":
-                    {
+                    "schema": {
                         "$ref": "#/definitions/Patient"
                     }
                 }],
-                "responses":
-                {
-                    "200":
-                    {
+                "responses": {
+                    "200": {
                         "description": "OK",
-                        "schema":
-                        {
+                        "schema": {
                             "$ref": "#/definitions/LoginResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/doesPatientExist": {
+            "post": {
+                "tags": ["Patient"],
+                "summary": "Check if patient with user_id exists",
+                "parameters": [{
+                    "name": "data",
+                    "in": "body",
+                    "description": "User ID fo the patient",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/DoesPatientExistRequest"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DoesPatientExistResponse"
+
                         }
                     }
                 }
             }
         }
     },
-    "definitions":
-    {
-        "User":
-        {
+    "definitions": {
+        "User": {
             "required": ["username", "password", "is_superuser", "first_name",
                 "last_name", "email", "is_staff", "is_active", "date_joined", "user_id", "secQues1",
                 "secAns1", "secQues2", "secAns2", "secQues3", "secAns3"
             ],
-            "properties":
-            {
-                "user_id":
-                {
+            "properties": {
+                "user_id": {
                     "type": "integer",
                     "example": "102",
                     "uniqueItems": true
                 },
-                "username":
-                {
+                "username": {
                     "type": "string",
                     "example": "testUser"
                 },
-                "password":
-                {
+                "password": {
                     "type": "string",
                     "example": "testUserPwd"
                 },
-                "is_superuser":
-                {
+                "is_superuser": {
                     "type": "boolean",
                     "example": 0
                 },
-                "first_name":
-                {
+                "first_name": {
                     "type": "string",
                     "example": "First"
                 },
-                "last_name":
-                {
+                "last_name": {
                     "type": "string",
                     "example": "Last"
                 },
-                "email":
-                {
+                "email": {
                     "type": "string",
                     "example": "testUser@gmail.com"
                 },
-                "is_staff":
-                {
+                "is_staff": {
                     "type": "boolean",
                     "example": 0
                 },
-                "is_active":
-                {
+                "is_active": {
                     "type": "boolean",
                     "example": 0
                 },
-                "date_joined":
-                {
+                "date_joined": {
                     "type": "date",
                     "pattern": "/([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/",
                     "example": "2019-05-17"
                 },
-                "secQues1":
-                {
+                "secQues1": {
                     "type": "string",
                     "example": "Favourite Food"
                 },
-                "secAns1":
-                {
+                "secAns1": {
                     "type": "string",
                     "example": "Rice"
                 },
-                "secQues2":
-                {
+                "secQues2": {
                     "type": "string",
                     "example": "Favourite Cricketer"
                 },
-                "secAns2":
-                {
+                "secAns2": {
                     "type": "string",
                     "example": "Sachin Tendulkar"
                 },
-                "secQues3":
-                {
+                "secQues3": {
                     "type": "string",
                     "example": "Favourite Sport"
                 },
-                "secAns3":
-                {
+                "secAns3": {
                     "type": "string",
                     "example": "Hockey"
                 }
             }
         },
-        "Patient":
-        {
+        "Patient": {
             "required": ["user_id", "password"],
-            "properties":
-            {
-                "user_id":
-                {
+            "properties": {
+                "user_id": {
                     "type": "integer",
                     "example": "102",
                     "uniqueItems": true
                 },
-                "password":
-                {
+                "password": {
                     "type": "string",
                     "example": "testUserPwd"
                 }
             }
         },
-        "LoginResponse":
-        {
-            "properties":
-            {
-                "message":
-                {
+        "LoginResponse": {
+            "properties": {
+                "message": {
                     "type": "string",
                     "example": "Patient is authenticated"
                 },
-                "isUserAuthenticated":
-                {
+                "isUserAuthenticated": {
                     "type": "boolean",
                     "example": 1
                 },
-                "id":
-                {
+                "id": {
+                    "type": "integer",
+                    "example": 102
+                }
+            }
+
+        },
+        "DoesPatientExistRequest": {
+            "required": ["user_id"],
+            "properties": {
+                "user_id": {
+                    "type": "integer",
+                    "example": "102",
+                    "uniqueItems": true
+                }
+            }
+
+        },
+        "DoesPatientExistResponse": {
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "example": "Patient exists"
+                },
+                "doesPatientExist": {
+                    "type": "boolean",
+                    "example": 1
+                },
+                "id": {
                     "type": "integer",
                     "example": 102
                 }
