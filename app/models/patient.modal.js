@@ -48,5 +48,31 @@ Patient.isAuthenticatedPatient = (patient, result) => {
     });
   };
   
+  Patient.getSecurityQuestions = (user_id, result) => {
+    sql.query(`SELECT id, secQues1, secQues2, secQues3 FROM auth_user WHERE user_id = ${user_id}`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+  
+      if (res.length) {
+        const response = {
+          id: res[0].id,           
+          secQues1: res[0].secQues1,
+          secQues2: res[0].secQues2,
+          secQues3: res[0].secQues3
+        }
+        console.log("Found Security Quesitions: ", response);
+        result(null, { message: "Security questions found exists", ...response});            
+        return;
+      }
+  
+      // not found Security question with the user_id
+      console.log("Security Questions not found")    
+      result(null, { message: "Security questions not found",});            
+    });
+  };
+
 
 module.exports = Patient;
