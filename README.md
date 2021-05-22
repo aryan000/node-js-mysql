@@ -1,29 +1,17 @@
+
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Node JS Backend Application.
+
+Reger to swagger Documentation: http://localhost:4000/api-docs/
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
 ### How do I get set up? ###
 
 * Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+    ** Run npm install
+    ** npm start
+    ** Create Mysql Database using the covid_repo.sql file.
+    ** Go to Swagger Documentation to test.
