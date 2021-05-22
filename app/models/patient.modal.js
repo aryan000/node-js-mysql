@@ -1,4 +1,5 @@
 const sql = require("./db.js");
+const logger = require('../config/logger.js');
 
 // constructor
 const Patient = function(patient) {
@@ -27,11 +28,11 @@ const Patient = function(patient) {
 Patient.create = (patient, result) => {
     sql.query("INSERT INTO auth_user SET ?", patient, (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            logger.error("error: ", err);
             result(err, null);
             return;
         }
-        console.log("User successfully registered with data ", { id: res.insertId, ...patient });
+        logger.info("User successfully registered with data ", { id: res.insertId, ...patient });
         result(null, { message: "User Successfully registered", userData: { id: res.insertId, ...patient } });
     });
 };
@@ -40,19 +41,19 @@ Patient.create = (patient, result) => {
 Patient.isAuthenticatedPatient = (patient, result) => {
     sql.query(`SELECT * FROM auth_user WHERE user_id = ? and password = ?`, [patient.user_id, patient.password], (err, res) => {
         if (err) {
-            console.log("Error while authenticating patient", err);
+            logger.error("Error while authenticating patient", err);
             result(err, null);
             return;
         }
 
         if (res.length) {
-            console.log("Found patient: ", { id: res[0].id, user_id: res[0].user_id });
+            logger.info("Found patient: ", { id: res[0].id, user_id: res[0].user_id });
             result(null, { message: "Patient is authenticated", isUserAuthenticated: true, id: res[0].id });
             return;
         }
 
         // not found Patient with the id and password  
-        console.log("Either Patient is not authenticated or user_Id does not exist")
+        logger.warn("Either Patient is not authenticated or user_Id does not exist")
         result(null, { message: "Patient is not authenticated/ User_ID does not exist", isUserAuthenticated: false });
     });
 };
@@ -61,19 +62,19 @@ Patient.isAuthenticatedPatient = (patient, result) => {
 Patient.doesPatientExist = (user_id, result) => {
     sql.query(`SELECT * FROM auth_user WHERE user_id = ?`, user_id, (err, res) => {
         if (err) {
-            console.log("Error while checking patient", err);
+            logger.error("Error while checking patient", err);
             result(err, null);
             return;
         }
 
         if (res.length) {
-            console.log("Found patient: ", { id: res[0].id, user_id: res[0].user_id });
+            logger.info("Found patient: ", { id: res[0].id, user_id: res[0].user_id });
             result(null, { message: "Patient exists", doesPatientExist: true, id: res[0].id });
             return;
         }
 
         // not found Patient with the id and password  
-        console.log("Patient does not exist")
+        logger.warn("Patient does not exist")
         result(null, { message: "Patient does not exist", doesPatientExist: false });
     });
 };
@@ -81,7 +82,7 @@ Patient.doesPatientExist = (user_id, result) => {
 Patient.getSecurityQuestions = (user_id, result) => {
     sql.query(`SELECT id, secQues1, secQues2, secQues3 FROM auth_user WHERE user_id = ${user_id}`, (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            logger.error("error: ", err);
             result(err, null);
             return;
         }
@@ -93,13 +94,13 @@ Patient.getSecurityQuestions = (user_id, result) => {
                 secQues2: res[0].secQues2,
                 secQues3: res[0].secQues3
             }
-            console.log("Found Security Quesitions: ", response);
+            logger.info("Found Security Quesitions: ", response);
             result(null, { message: "Security questions found exists", ...response });
             return;
         }
 
         // not found Security question with the user_id
-        console.log("Security Questions not found")
+        logger.warn("Security Questions not found")
         result(null, { message: "Security questions not found", });
     });
 };
@@ -108,7 +109,7 @@ Patient.getSecurityQuestions = (user_id, result) => {
 Patient.validateSecurityQuestions = (patient, result) => {
     sql.query(`SELECT id, secQues1, secQues2, secQues3, secAns1, secAns2, secAns3 FROM auth_user WHERE user_id = ${patient.user_id}`, (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            logger.error("error: ", err);
             result(err, null);
             return;
         }
@@ -119,12 +120,12 @@ Patient.validateSecurityQuestions = (patient, result) => {
 
                 response.message = "Successfully matched";
                 response.successFullMatch = true;
-                console.log("Security Questions successful matched for user_ID: ", patient.user_id);
+                logger.info("Security Questions successful matched for user_ID: ", patient.user_id);
                 result(null, { message: "Security Questions successful matched for user_ID: " + patient.user_id, isSuccessfulMatch: true });
                 return;
             }
         }
-        console.log("Security Questions Not matched for user_ID: ", patient.user_id);
+        logger.warn("Security Questions Not matched for user_ID: ", patient.user_id);
         result(null, { message: "Security Question doesnt match for user_ID: " + patient.user_id });
         return;
     });
@@ -136,17 +137,18 @@ Patient.updatePassword = (patient, result) => {
         [patient.password, patient.user_id],
         (err, res) => {
             if (err) {
-                console.log("error: ", err);
+                logger.error("error: ", err);
                 result(null, err);
                 return;
             }
             
             if (res.affectedRows == 0) {
+                logger.warn("Patient is not found for user_id:" + patient.user_id)
                 result({ patient: "not_found" }, null);
                 return;
             }
 
-            console.log("updated patient: ", { user_id: patient.user_id });
+            logger.info("updated patient: ", { user_id: patient.user_id });
             result(null, { user_id: patient.user_id, "message": "Password successfully updated" });
         }
     );

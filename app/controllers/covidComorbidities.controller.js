@@ -1,8 +1,8 @@
 const Comorbidities = require("../models/comorbidities.modal.js");
-
+const logger = require('../config/logger.js');
 
 exports.updateComorbidities = (req, res) => {
-  
+    logger.info("Receiving request for updateComorbidities");
     // Validate request
     if (!req.body) {
         res.status(400).send({

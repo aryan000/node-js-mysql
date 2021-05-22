@@ -1,4 +1,5 @@
 const sql = require("./db.js");
+const logger = require('../config/logger.js');
 
 // constructor
 const ReportValue = function(reportValue) {
@@ -23,6 +24,17 @@ const ReportValue = function(reportValue) {
   
 };
 
+ReportValue.updateReportValues = (reportValue, result) => {
+  sql.query("INSERT INTO covidapp_reportvalues SET ?", reportValue, (err, res) => {
+      if (err) {
+          logger.error("error: ", err);
+          result(err, null);
+          return;
+      }
+      logger.info("Covid covidapp_reportvalues successfully updated with data ", { id: res.insertId, ...reportValue });
+      result(null, { message: "Covid covidapp_reportvalues successfully updated with data ", userData: { id: res.insertId, ...reportValue } });
+  });
+};
 
 
 module.exports = ReportValue;

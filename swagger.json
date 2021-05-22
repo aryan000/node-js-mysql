@@ -179,7 +179,8 @@
                 }
             }
         },
-        "/updatePassword":{
+        "/updatePassword":
+        {
             "put":
             {
                 "tags": ["Patient"],
@@ -208,9 +209,11 @@
                     }
                 }
             }
-        }, 
-        "/updateCovidSymptoms":{
-            "post":{
+        },
+        "/updateCovidSymptoms":
+        {
+            "post":
+            {
                 "tags": ["CovidSymptoms"],
                 "summary": "Update covid symptoms for patient",
                 "parameters": [
@@ -231,15 +234,17 @@
                         "description": "OK",
                         "schema":
                         {
-                            "$ref": "#/definitions/SecurityQuestionValidationResponse"
+                            "$ref": "#/definitions/CovidSymptoms"
 
                         }
                     }
                 }
             }
         },
-        "/updateComorbidities":{
-            "post":{
+        "/updateComorbidities":
+        {
+            "post":
+            {
                 "tags": ["Comorbidities"],
                 "summary": "Update comorbidities symptoms for patient",
                 "parameters": [
@@ -260,7 +265,38 @@
                         "description": "OK",
                         "schema":
                         {
-                            "$ref": "#/definitions/SecurityQuestionValidationResponse"
+                            "$ref": "#/definitions/Comorbidities"
+
+                        }
+                    }
+                }
+            }
+        },
+        "/updateReportValues":
+        {
+            "post":
+            {
+                "tags": ["ReportValues"],
+                "summary": "Update reportValues symptoms for patient",
+                "parameters": [
+                {
+                    "name": "data",
+                    "in": "body",
+                    "description": "ReportValues for the patient",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/ReportValues"
+                    }
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "OK",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ReportValues"
 
                         }
                     }
@@ -475,7 +511,7 @@
         "SecurityQuestionValidationRequest":
         {
             "properties":
-            {                
+            {
                 "secQues1":
                 {
                     "type": "string",
@@ -549,7 +585,7 @@
                 {
                     "type": "string",
                     "example": "updatedPassword"
-                },               
+                },
                 "user_id":
                 {
                     "type": "integer",
@@ -558,157 +594,288 @@
             }
 
         },
-        "CovidSymptoms":{
-            "required":["diarhea","fever","dry_cough","body_ache","headache","runny_nose","nausea",
-                "vomiting","anosmia","ageusia","rashes","conjunctivitis","date","user_id",
-                "covidseverity"],
-                "properties":
+        "CovidSymptoms":
+        {
+            "required": ["diarhea", "fever", "dry_cough", "body_ache", "headache", "runny_nose", "nausea",
+                "vomiting", "anosmia", "ageusia", "rashes", "conjunctivitis", "date", "user_id",
+                "covidseverity"
+            ],
+            "properties":
             {
-                "sore_throat": {
+                "sore_throat":
+                {
                     "type": "integer",
-                    "example":0
+                    "example": 0
                 },
-                "diarhea" : {
+                "diarhea":
+                {
                     "type": "integer",
-                    "example":0
-                  },
-                  "fever" : {
+                    "example": 0
+                },
+                "fever":
+                {
                     "type": "integer",
-                    "example":0
-                  },
-                  "dry_cough" : {
+                    "example": 0
+                },
+                "dry_cough":
+                {
                     "type": "integer",
-                    "example":0
-                  },
-                  "body_ache" : {
+                    "example": 0
+                },
+                "body_ache":
+                {
                     "type": "integer",
-                    "example":0
-                  },
-                  "headache" : {
+                    "example": 0
+                },
+                "headache":
+                {
                     "type": "integer",
-                    "example":0
-                  },
-                  "runny_nose" : {
+                    "example": 0
+                },
+                "runny_nose":
+                {
                     "type": "integer",
-                    "example":0
-                  },
-                  "nausea" : {
+                    "example": 0
+                },
+                "nausea":
+                {
                     "type": "integer",
-                    "example":0
-                  },
-                  "vomiting" : {
+                    "example": 0
+                },
+                "vomiting":
+                {
                     "type": "integer",
-                    "example":0
-                  },
-                  "anosmia" : {
+                    "example": 0
+                },
+                "anosmia":
+                {
                     "type": "integer",
-                    "example":0
-                  },
-                  "ageusia" : {
+                    "example": 0
+                },
+                "ageusia":
+                {
                     "type": "integer",
-                    "example":0
-                  },
-                  "rashes" : {
+                    "example": 0
+                },
+                "rashes":
+                {
                     "type": "integer",
-                    "example":0
-                  },
-                  "conjunctivitis" : {
+                    "example": 0
+                },
+                "conjunctivitis":
+                {
                     "type": "integer",
-                    "example":0
-                  },
-                  "date" : {
+                    "example": 0
+                },
+                "date":
+                {
                     "type": "date",
                     "pattern": "/([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/",
                     "example": "2019-05-17"
-                  },
-                  "user_id" : {
-                    "type": "integer",
-                    "example":13,
-                    "uniqueItems": true
-                  },
-                  "covidseverity" : {
-                    "type": "integer",
-                    "example":0
-                  }                  
-            } 
-        },
-        "Comorbidities":{
-            "required":["diabetes","copd","renal","pvd","chf","dementia","cancer","stroke",
-                "hepatic","heart","ulcer","paralysis","aids","arthritis","user_id",
-                "dateFirstSymptoms"],
-                "properties":
-            {
-                "id": {
-                    "type": "integer",
-                    "example": 0
-                  },
-                  "diabetes": {
-                    "type": "integer",
-                    "example": 0
-                  },
-                  "copd": {
-                    "type": "integer",
-                    "example": 0
-                  },
-                  "renal": {
-                    "type": "integer",
-                    "example": 0
-                  },
-                  "pvd": {
-                    "type": "integer",
-                    "example": 0
-                  },
-                  "chf": {
-                    "type": "integer",
-                    "example": 0
-                  },
-                  "dementia": {
-                    "type": "integer",
-                    "example": 0
-                  },
-                  "cancer": {
-                    "type": "integer",
-                    "example": 0
-                  },
-                  "stroke": {
-                    "type": "integer",
-                    "example": 0
-                  },
-                  "hepatic": {
-                    "type": "integer",
-                    "example": 0
-                  },
-                  "heart": {
-                    "type": "integer",
-                    "example": 0
-                  },
-                  "ulcer": {
-                    "type": "integer",
-                    "example": 0
-                  },
-                  "paralysis": {
-                    "type": "integer",
-                    "example": 0
-                  },
-                  "aids": {
-                    "type": "integer",
-                    "example": 0
-                  },
-                  "arthritis": {
-                    "type": "integer",
-                    "example": 0
-                  },
-                  "user_id": {
+                },
+                "user_id":
+                {
                     "type": "integer",
                     "example": 13,
                     "uniqueItems": true
-                  },
-                  "dateFirstSymptoms": {
-                     "type": "date",
-                      "pattern": "/([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/",
-                      "example": "2019-05-17"
-                  }           
-            } 
+                },
+                "covidseverity":
+                {
+                    "type": "integer",
+                    "example": 0
+                }
+            }
+        },
+        "Comorbidities":
+        {
+            "required": ["diabetes", "copd", "renal", "pvd", "chf", "dementia", "cancer", "stroke",
+                "hepatic", "heart", "ulcer", "paralysis", "aids", "arthritis", "user_id",
+                "dateFirstSymptoms"
+            ],
+            "properties":
+            {
+                "diabetes":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "copd":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "renal":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "pvd":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "chf":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "dementia":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "cancer":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "stroke":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "hepatic":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "heart":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "ulcer":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "paralysis":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "aids":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "arthritis":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "user_id":
+                {
+                    "type": "integer",
+                    "example": 13,
+                    "uniqueItems": true
+                },
+                "dateFirstSymptoms":
+                {
+                    "type": "date",
+                    "pattern": "/([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/",
+                    "example": "2019-05-17"
+                }
+            }
+        },
+        "ReportValues":
+        {
+            "required": ["id", "ferritin", "pct", "ddimer", "crp", "ldh", "il6", "lymphocyte", "neutrophil",
+                "lympho_neutro_ratio", "bilirubin", "temperature", "oxygensat", "blood_pressure",
+                "date_added", "date_report", "user_id", "rtpcrCycleNumber"
+            ],
+            "properties":
+            {
+                "ferritin":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "pct":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "ddimer":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "crp":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "ldh":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "il6":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "lymphocyte":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "neutrophil":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "lympho_neutro_ratio":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "bilirubin":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "temperature":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "oxygensat":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "blood_pressure":
+                {
+                    "type": "integer",
+                    "example": 0
+                },
+                "date_added":
+                {
+                    "type": "date",
+                    "pattern": "/([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/",
+                    "example": "2019-05-17"
+                },
+                "date_report":
+                {
+                    "type": "date",
+                    "pattern": "/([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/",
+                    "example": "2019-05-17"
+                },
+                "user_id":
+                {
+                    "type": "integer",
+                    "example": 13,
+                    "uniqueItems": true
+                },
+                "rtpcrCycleNumber":
+                {
+                    "type": "integer",
+                    "example": 0
+                }
+
+            }
         }
     }
 }
