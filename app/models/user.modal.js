@@ -31,8 +31,8 @@ User.create = (user, result) => {
       result(err, null);
       return;
     }    
-    console.log("user: ", { id: res.insertId, ...user });
-    result(null, { id: res.insertId, ...user });
+    console.log("User successfully registered with data ",{id: res.insertId, ...user } );    
+    result(null, { message: "User Successfully registered", userData: {id: res.insertId, ...user }});    
   });
 };
 
