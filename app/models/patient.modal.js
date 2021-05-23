@@ -76,7 +76,7 @@ Patient.doesPatientExist = (user_id, result) => {
 };
 
 Patient.getSecurityQuestions = (user_id, result) => {
-    sql.query(`SELECT id, secQues1, secQues2, secQues3 FROM auth_user WHERE user_id = ${user_id}`, (err, res) => {
+    sql.query(`SELECT id, secQues1, secQues2, secQues3 FROM auth_user WHERE user_id = ?`, user_id, (err, res) => {
         if (err) {
             logger.error("error: ", err);
             result(err, null);

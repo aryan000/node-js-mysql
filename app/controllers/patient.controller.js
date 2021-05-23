@@ -95,7 +95,7 @@ exports.doesPatientExist = (req, res) => {
 // GetSecurity Questions for the patiet
 exports.getSecurityQuestions = (req, res) => {
 
-    logger.info("Getting security Questions");
+    logger.info("Getting security Questions for user: "+ req.params.user_id);
 
     Patient.getSecurityQuestions(req.params.user_id, (err, data) => {
         if (err) {

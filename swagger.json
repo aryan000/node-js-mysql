@@ -141,7 +141,7 @@
                         "description": "OK",
                         "schema":
                         {
-                            "$ref": "#/definitions/DoesPatientExistResponse"
+                            "$ref": "#/definitions/SecurityQuestionResponse"
 
                         }
                     }
