@@ -11,25 +11,25 @@ exports.updateComorbidities = (req, res) => {
     }
 
     const comorbidities = new Comorbidities({
-        id : req.body.id,
-        diabetes : req.body.diabetes || 0,
-        copd : req.body.copd || 0 ,
-        renal : req.body.renal || 0 ,
-        pvd : req.body.pvd || 0,
-        chf : req.body.chf || 0,
-        dementia : req.body.dementia || 0,
-        cancer : req.body.cancer || 0,
-        stroke : req.body.stroke || 0,
-        hepatic : req.body.hepatic || 0 ,
-        heart : req.body.heart || 0 ,
-        ulcer : req.body.ulcer || 0,
-        paralysis : req.body.paralysis || 0 ,
-        aids : req.body.aids || 0 ,
-        arthritis : req.body.arthritis || 0,
-        user_id : req.body.user_id,
-        dateFirstSymptoms : req.body.dateFirstSymptoms || new Date(),
+        id: req.body.id,
+        diabetes: req.body.diabetes || 0,
+        copd: req.body.copd || 0,
+        renal: req.body.renal || 0,
+        pvd: req.body.pvd || 0,
+        chf: req.body.chf || 0,
+        dementia: req.body.dementia || 0,
+        cancer: req.body.cancer || 0,
+        stroke: req.body.stroke || 0,
+        hepatic: req.body.hepatic || 0,
+        heart: req.body.heart || 0,
+        ulcer: req.body.ulcer || 0,
+        paralysis: req.body.paralysis || 0,
+        aids: req.body.aids || 0,
+        arthritis: req.body.arthritis || 0,
+        user_id: req.body.user_id,
+        dateFirstSymptoms: req.body.dateFirstSymptoms || new Date(),
     });
-  
+
     // Save Patient in the database
     Comorbidities.updateComorbidities(comorbidities, (err, data) => {
         if (err)
@@ -39,9 +39,3 @@ exports.updateComorbidities = (req, res) => {
         else res.send(data);
     });
 };
-
-
-
-
-
-

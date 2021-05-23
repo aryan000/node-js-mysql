@@ -29,7 +29,7 @@ exports.updateCovidSymptoms = (req, res) => {
         sore_throat: req.body.sore_throat,
         covidseverity: req.body.covidseverity,
     });
-  
+
     // Save Patient in the database
     CovidSymptoms.updateCovidSymptoms(covidSymptoms, (err, data) => {
         if (err)
@@ -39,7 +39,3 @@ exports.updateCovidSymptoms = (req, res) => {
         else res.send(data);
     });
 };
-
-
-
-

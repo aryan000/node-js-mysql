@@ -2,27 +2,23 @@ const sql = require("./db.js");
 const logger = require('../config/logger.js');
 
 // constructor
-const Patient = function(patient) {
-    if (patient.user_id !== undefined) { this.user_id = patient.user_id; }
-    if (patient.username !== undefined) {
-        this.username = patient.username;
-        const user_name = this.username.split(" ")
-        this.first_name = patient.first_name || user_name[0];
-        this.last_name = patient.last_name || user_name[user_name.length - 1];
-    };
-    if (patient.password !== undefined) { this.password = patient.password; };
-    if (patient.is_superuser !== undefined) { this.is_superuser = patient.is_superuser || 0; };
-    if (patient.email !== undefined) { this.email = patient.email; };
-    if (patient.is_staff !== undefined) { this.is_staff = patient.is_staff || 0; };
-    if (patient.is_active !== undefined) { this.is_active = patient.is_active || 0; };
-    if (patient.date_joined !== undefined) { this.date_joined = patient.date_joined || new Date(); };
-    if (patient.user_id !== undefined) { this.user_id = patient.user_id; };
-    if (patient.secQues1 !== undefined) { this.secQues1 = patient.secQues1; };
-    if (patient.secAns1 !== undefined) { this.secAns1 = patient.secAns1; };
-    if (patient.secQues2 !== undefined) { this.secQues2 = patient.secQues2; };
-    if (patient.secAns2 !== undefined) { this.secAns2 = patient.secAns2; };
-    if (patient.secQues3 !== undefined) { this.secQues3 = patient.secQues3; };
-    if (patient.secAns3 !== undefined) { this.secAns3 = patient.secAns3; };
+
+const Patient = function(patient) {    
+    this.user_id = patient.user_id; 
+    this.name = patient.name;
+    this.password = patient.password;
+    this.last_login = patient.last_login || new Date();
+    this.age = patient.age;
+    this.date_of_birth = patient.date_of_birth;
+    this.email = patient.email || null;
+    this.date_joined = patient.date_joined || new Date();
+    this.secQues1 = patient.secQues1;
+    this.secQues2 = patient.secQues2;
+    this.secQues3 = patient.secQues3;
+    this.secAns1= patient.secAns1;
+    this.secAns2= patient.secAns2;
+    this.secAns3= patient.secAns3; 
+    this.phoneNumber = patient.phoneNumber || null;   
 };
 
 Patient.create = (patient, result) => {
@@ -141,7 +137,7 @@ Patient.updatePassword = (patient, result) => {
                 result(null, err);
                 return;
             }
-            
+
             if (res.affectedRows == 0) {
                 logger.warn("Patient is not found for user_id:" + patient.user_id)
                 result({ patient: "not_found" }, null);

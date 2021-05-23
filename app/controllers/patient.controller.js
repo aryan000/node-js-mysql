@@ -10,24 +10,20 @@ exports.create = (req, res) => {
             message: "Content can not be empty!"
         });
     }
+    
     // Create a Patient
     const patient = new Patient({
-        username: req.body.username,
-        password: req.body.password,
-        is_superuser: req.body.is_superuser,
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        email: req.body.email,
-        is_staff: req.body.is_staff,
-        is_active: req.body.is_active,
-        date_joined: req.body.date_joined,
-        user_id: req.body.user_id,
-        secQues1: req.body.secQues1,
-        secAns1: req.body.secAns1,
-        secQues2: req.body.secQues2,
-        secAns2: req.body.secAns2,
-        secQues3: req.body.secQues3,
-        secAns3: req.body.secAns3
+        user_id : req.body.user_id,
+        name : req.body.name,
+        password : req.body.password,
+        age : req.body.age,
+        date_of_birth : req.body.date_of_birth,
+        secQues1 : req.body.secQues1,
+        secQues2 : req.body.secQues2,
+        secQues3 : req.body.secQues3,
+        secAns1 : req.body.secAns1,
+        secAns2 : req.body.secAns2,
+        secAns3 : req.body.secAns3
     });
 
     // Save Patient in the database
@@ -44,7 +40,7 @@ exports.create = (req, res) => {
 // Authorizes login for a patient
 exports.login = (req, res) => {
     logger.info("Validating request for login");
-    
+
     // Validate request
     if (!req.body) {
         res.status(400).send({
@@ -72,7 +68,7 @@ exports.login = (req, res) => {
 exports.doesPatientExist = (req, res) => {
 
     logger.info("Validating request if patient exist");
-    
+
     // Validate request
     if (!req.body) {
         res.status(400).send({
@@ -98,7 +94,7 @@ exports.doesPatientExist = (req, res) => {
 
 // GetSecurity Questions for the patiet
 exports.getSecurityQuestions = (req, res) => {
-    
+
     logger.info("Getting security Questions");
 
     Patient.getSecurityQuestions(req.params.user_id, (err, data) => {
@@ -136,12 +132,11 @@ exports.validateSecurityQuestions = (req, res) => {
     });
 
     Patient.validateSecurityQuestions(patient, (err, data) => {
-        if (err){
+        if (err) {
             res.status(500).send({
                 message: err.message || "Some error occurred while creating the Patient."
             });
-        }
-        else res.send(data);
+        } else res.send(data);
     });
 };
 

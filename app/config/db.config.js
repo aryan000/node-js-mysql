@@ -3,4 +3,4 @@ module.exports = {
     USER: "covid",
     PASSWORD: "covid",
     DB: "covid_repo"
-  };
+};

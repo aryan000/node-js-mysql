@@ -21,7 +21,7 @@ app.use(morgan('tiny'));
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Covid Repo application. Refer: http://localhost:4000/api-docs/" });
+    res.json({ message: "Welcome to Covid Repo application. Refer: http://localhost:4000/api-docs/" });
 });
 
 // adding all routes
@@ -29,5 +29,5 @@ require("./app/routes/covidapp.routes.js")(app);
 
 // set port, listen for requests
 app.listen(4000, () => {
-  logger.info("Server is running on port 4000.");
+    logger.info("Server is running on port 4000.");
 });
