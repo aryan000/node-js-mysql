@@ -31,5 +31,5 @@ module.exports = app => {
 
     // Update the report values for the patient
     app.post("/updateReportValues", report.updateReportValues);
-    
-  };
+
+};

@@ -589,7 +589,7 @@
                 "user_id":
                 {
                     "type": "integer",
-                    "example": 111
+                    "example": 102
                 }
             }
 
