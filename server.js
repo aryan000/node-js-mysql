@@ -30,4 +30,5 @@ require("./app/routes/covidapp.routes.js")(app);
 // set port, listen for requests
 app.listen(4000, () => {
     logger.info("Server is running on port 4000.");
+    logger.info("Refer to Swagger Documentation for API Details: http://localhost:4000/api-docs/")
 });
