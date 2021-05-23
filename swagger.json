@@ -181,7 +181,7 @@
         },
         "/updatePassword":
         {
-            "put":
+            "post":
             {
                 "tags": ["Patient"],
                 "summary": "Update password for the patient",

@@ -21,7 +21,7 @@ module.exports = app => {
     app.post("/validateSecurityQuestions", patient.validateSecurityQuestions);
 
     // Updates the password for the patient
-    app.put("/updatePassword", patient.updatePassword);
+    app.post("/updatePassword", patient.updatePassword);
 
     // Update the covidSymptoms for the patient
     app.post("/updateCovidSymptoms", covidSymptoms.updateCovidSymptoms);
