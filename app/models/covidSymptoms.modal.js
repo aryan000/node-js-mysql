@@ -3,23 +3,23 @@ const logger = require('../config/logger.js');
 
 // constructor
 const CovidSymptoms = function(covidSymptoms) {
-    if (covidSymptoms.id !== undefined) { this.id = covidSymptoms.id; }
-    if (covidSymptoms.sore_throat !== undefined) { this.sore_throat = covidSymptoms.sore_throat || 0; }
-    if (covidSymptoms.diarhea !== undefined) { this.diarhea = covidSymptoms.diarhea || 0; }
-    if (covidSymptoms.fever !== undefined) { this.fever = covidSymptoms.fever || 0; }
-    if (covidSymptoms.dry_cough !== undefined) { this.dry_cough = covidSymptoms.dry_cough || 0; }
-    if (covidSymptoms.body_ache !== undefined) { this.body_ache = covidSymptoms.body_ache || 0; }
-    if (covidSymptoms.headache !== undefined) { this.headache = covidSymptoms.headache || 0; }
-    if (covidSymptoms.runny_nose !== undefined) { this.runny_nose = covidSymptoms.runny_nose || 0; }
-    if (covidSymptoms.nausea !== undefined) { this.nausea = covidSymptoms.nausea || 0; }
-    if (covidSymptoms.vomiting !== undefined) { this.vomiting = covidSymptoms.vomiting || 0; }
-    if (covidSymptoms.anosmia !== undefined) { this.anosmia = covidSymptoms.anosmia || 0; }
-    if (covidSymptoms.ageusia !== undefined) { this.ageusia = covidSymptoms.ageusia || 0; }
-    if (covidSymptoms.rashes !== undefined) { this.rashes = covidSymptoms.rashes || 0; }
-    if (covidSymptoms.conjunctivitis !== undefined) { this.conjunctivitis = covidSymptoms.conjunctivitis || 0; }
-    if (covidSymptoms.date !== undefined) { this.date = covidSymptoms.date || new Date(); }
-    if (covidSymptoms.user_id !== undefined) { this.user_id = covidSymptoms.user_id; }
-    if (covidSymptoms.covidseverity !== undefined) { this.covidseverity = covidSymptoms.covidseverity || 0; }
+    this.id = covidSymptoms.id;
+    this.sore_throat = covidSymptoms.sore_throat;
+    this.diarhea = covidSymptoms.diarhea;
+    this.fever = covidSymptoms.fever;
+    this.dry_cough = covidSymptoms.dry_cough;
+    this.body_ache = covidSymptoms.body_ache;
+    this.headache = covidSymptoms.headache;
+    this.runny_nose = covidSymptoms.runny_nose;
+    this.nausea = covidSymptoms.nausea;
+    this.vomiting = covidSymptoms.vomiting;
+    this.anosmia = covidSymptoms.anosmia;
+    this.ageusia = covidSymptoms.ageusia;
+    this.rashes = covidSymptoms.rashes;
+    this.conjunctivitis = covidSymptoms.conjunctivitis;
+    this.date = covidSymptoms.date;
+    this.user_id = covidSymptoms.user_id;
+    this.covidseverity = covidSymptoms.covidseverity;
 };
 
 CovidSymptoms.updateCovidSymptoms = (covidSymptoms, result) => {
